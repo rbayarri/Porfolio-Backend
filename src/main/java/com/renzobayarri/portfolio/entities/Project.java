@@ -19,21 +19,21 @@ public class Project {
   private String name;
   private String description;
   private byte[] picture;
-  private String url_github;
-  private String url_project;
+  private String urlGithub;
+  private String urlProject;
   @ManyToMany
   private ArrayList<Technology> technologies = new ArrayList<>();
 
   public Project() {
   }
 
-  public Project(int id, String name, String description, byte[] picture, String url_github, String url_project) {
+  public Project(int id, String name, String description, byte[] picture, String urlGithub, String urlProject) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.picture = picture;
-    this.url_github = url_github;
-    this.url_project = url_project;
+    this.urlGithub = urlGithub;
+    this.urlProject = urlProject;
   }
 
 }
