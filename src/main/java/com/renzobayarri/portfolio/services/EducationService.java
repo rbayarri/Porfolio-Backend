@@ -3,9 +3,7 @@ package com.renzobayarri.portfolio.services;
 import com.renzobayarri.portfolio.entities.Education;
 import com.renzobayarri.portfolio.exceptions.EducationNotFoundException;
 import com.renzobayarri.portfolio.repositories.EducationRepository;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,31 +15,31 @@ public class EducationService {
   EducationRepository educationRepository;
 
   @Transactional
-  public Education createEducation(String carrer, String institution, LocalDate startDate, LocalDate finishDate) {
-    Education newEducation = new Education(carrer, institution, startDate, finishDate);
-    return educationRepository.save(newEducation);
+  public Education createEducation(Education education) {
+    return educationRepository.save(education);
   }
 
   @Transactional
-  public Education updateEducation(int id, String carrer, String institution, LocalDate startDate, LocalDate finishDate) throws EducationNotFoundException {
-    Education updatedEducation = findEducationById(id);
-    updatedEducation.setCarrer(carrer);
-    updatedEducation.setInstitution(institution);
-    updatedEducation.setStartDate(startDate);
-    updatedEducation.setFinishDate(finishDate);
-    return educationRepository.save(updatedEducation);
+  public Education updateEducation(int id, Education education) throws EducationNotFoundException {
+    if (educationRepository.existsById(id)) {
+      education.setId(id);
+      return educationRepository.save(education);
+    }
+    throw new EducationNotFoundException();
   }
 
   @Transactional
   public void deleteEducation(int id) throws EducationNotFoundException {
-    Education deletedEducation = findEducationById(id);
-    educationRepository.delete(deletedEducation);
+    if (educationRepository.existsById(id)) {
+      educationRepository.deleteById(id);
+    }
+    throw new EducationNotFoundException();
   }
 
   @Transactional(readOnly = true)
   public Education findEducationById(int id) throws EducationNotFoundException {
-    Optional<Education> optionalEducation = educationRepository.findById(id);
-    return optionalEducation.orElseThrow(EducationNotFoundException::new);
+    return educationRepository.findById(id)
+            .orElseThrow(EducationNotFoundException::new);
   }
 
   @Transactional(readOnly = true)
