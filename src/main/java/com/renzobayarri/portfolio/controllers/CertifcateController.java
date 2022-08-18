@@ -1,6 +1,7 @@
 package com.renzobayarri.portfolio.controllers;
 
 import com.renzobayarri.portfolio.entities.Certificate;
+import com.renzobayarri.portfolio.exceptions.CertificateNotFoundException;
 import com.renzobayarri.portfolio.services.CertificateService;
 import java.util.List;
 import javax.validation.Valid;
@@ -21,28 +22,28 @@ public class CertifcateController {
   @Autowired
   private CertificateService certificateService;
   
-  @GetMapping("/")
+  @GetMapping("")
   public List<Certificate> getAll() {
     return certificateService.listAllCertificates();
   }
   
   @GetMapping("/{id}")
-  public Certificate getOne(@PathVariable int id) {
+  public Certificate getOne(@PathVariable int id) throws CertificateNotFoundException {
     return certificateService.findCertificateById(id);
   }
   
-  @PostMapping("/")
+  @PostMapping("")
   public Certificate createOne(@RequestBody @Valid Certificate certificate) {
     return certificateService.createCertificate(certificate);
   }
   
   @PutMapping("/{id}")
-  public Certificate updateOne(@RequestBody @Valid Certificate certificate, @PathVariable int id) {
+  public Certificate updateOne(@RequestBody @Valid Certificate certificate, @PathVariable int id) throws CertificateNotFoundException {
     return certificateService.updateCertificate(id, certificate);
   }
   
   @DeleteMapping("/{id}")
-  public void deleteOne(@PathVariable int id) {
+  public void deleteOne(@PathVariable int id) throws CertificateNotFoundException {
     certificateService.deleteCertificate(id);
   }
   

@@ -1,6 +1,7 @@
 package com.renzobayarri.portfolio.controllers;
 
 import com.renzobayarri.portfolio.entities.Experience;
+import com.renzobayarri.portfolio.exceptions.ExperienceNotFoundException;
 import com.renzobayarri.portfolio.services.ExperienceService;
 import java.util.List;
 import javax.validation.Valid;
@@ -21,28 +22,28 @@ public class ExperienceController {
   @Autowired
   private ExperienceService experienceService;
 
-  @GetMapping("/")
+  @GetMapping("")
   public List<Experience> getAll() {
     return experienceService.listAllExperiences();
   }
 
   @GetMapping("/{id}")
-  public Experience getOne(@PathVariable int id) {
+  public Experience getOne(@PathVariable int id) throws ExperienceNotFoundException {
     return experienceService.findExperienceById(id);
   }
 
-  @PostMapping("/")
+  @PostMapping("")
   public Experience createOne(@RequestBody @Valid Experience experience) {
     return experienceService.createExperience(experience);
   }
 
   @PutMapping("/{id}")
-  public Experience updateOne(@RequestBody @Valid Experience experience, @PathVariable int id) {
+  public Experience updateOne(@RequestBody @Valid Experience experience, @PathVariable int id) throws ExperienceNotFoundException {
     return experienceService.updateExperience(id, experience);
   }
 
   @DeleteMapping("/{id}")
-  public void deleteOne(@PathVariable int id) {
+  public void deleteOne(@PathVariable int id) throws ExperienceNotFoundException {
     experienceService.deleteExperience(id);
   }
 }

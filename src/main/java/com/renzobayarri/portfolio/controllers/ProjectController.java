@@ -1,6 +1,7 @@
 package com.renzobayarri.portfolio.controllers;
 
 import com.renzobayarri.portfolio.entities.Project;
+import com.renzobayarri.portfolio.exceptions.ProjectNotFoundException;
 import com.renzobayarri.portfolio.services.ProjectService;
 import java.util.List;
 import javax.validation.Valid;
@@ -21,28 +22,28 @@ public class ProjectController {
   @Autowired
   private ProjectService projectService;
 
-  @GetMapping("/")
+  @GetMapping("")
   public List<Project> getAll() {
     return projectService.listAllProjects();
   }
 
   @GetMapping("/{id}")
-  public Project getOne(@PathVariable int id) {
+  public Project getOne(@PathVariable int id) throws ProjectNotFoundException {
     return projectService.findProjectById(id);
   }
 
-  @PostMapping("/")
+  @PostMapping("")
   public Project createOne(@RequestBody @Valid Project project) {
     return projectService.createProject(project);
   }
 
   @PutMapping("/{id}")
-  public Project updateOne(@RequestBody @Valid Project project, @PathVariable int id) {
+  public Project updateOne(@RequestBody @Valid Project project, @PathVariable int id) throws ProjectNotFoundException {
     return projectService.updateProject(id, project);
   }
 
   @DeleteMapping("/{id}")
-  public void deleteOne(@PathVariable int id) {
+  public void deleteOne(@PathVariable int id) throws ProjectNotFoundException {
     projectService.deleteProject(id);
   }
 }
