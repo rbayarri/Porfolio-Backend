@@ -1,28 +1,33 @@
 package com.renzobayarri.portfolio.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Project {
+public class Project implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private int id;
+  @NotBlank
   private String name;
+  @NotBlank
   private String description;
   private byte[] picture;
   private String urlGithub;
   private String urlProject;
   @ManyToMany
-  private ArrayList<Technology> technologies = new ArrayList<>();
+  private List<Technology> technologies = new ArrayList<>();
 
   public Project() {
   }

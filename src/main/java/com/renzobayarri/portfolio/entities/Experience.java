@@ -1,11 +1,12 @@
 package com.renzobayarri.portfolio.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 import lombok.Getter;
@@ -14,22 +15,22 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Experience implements Comparable<Experience> {
+public class Experience implements Comparable<Experience>, Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private int id;
-  @NotNull
+  @NotBlank
   @Size(min = 6)
   private String institution;
-  @NotNull
+  @NotBlank
   @Size(min = 6)
   private String charge;
-  @NotNull
+  @NotBlank
   @PastOrPresent
   private LocalDate startDate;
   private LocalDate finishDate;
-  @NotNull
+  @NotBlank
   @Size(min = 10)
   private String description;
 
