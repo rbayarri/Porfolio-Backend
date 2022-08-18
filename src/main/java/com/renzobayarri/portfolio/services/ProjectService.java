@@ -32,6 +32,7 @@ public class ProjectService {
   public void deleteProject(int id) throws ProjectNotFoundException {
     if (projectRepositoy.existsById(id)) {
       projectRepositoy.deleteById(id);
+      return;
     }
     throw new ProjectNotFoundException();
   }

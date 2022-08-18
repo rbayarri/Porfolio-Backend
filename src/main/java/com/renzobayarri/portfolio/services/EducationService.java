@@ -32,6 +32,7 @@ public class EducationService {
   public void deleteEducation(int id) throws EducationNotFoundException {
     if (educationRepository.existsById(id)) {
       educationRepository.deleteById(id);
+      return;
     }
     throw new EducationNotFoundException();
   }

@@ -32,6 +32,7 @@ public class TechnologyService {
   public void deleteTechnology(int id) throws TechnologyNotFoundException {
     if (technologyRepository.existsById(id)) {
       technologyRepository.deleteById(id);
+      return;
     }
     throw new TechnologyNotFoundException();
   }
