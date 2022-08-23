@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ErrorController {
 
   @ResponseBody
-  @ExceptionHandler
+  @ExceptionHandler(RuntimeException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public String resourceNotFoundHandler(Exception e) {
     return e.getMessage();

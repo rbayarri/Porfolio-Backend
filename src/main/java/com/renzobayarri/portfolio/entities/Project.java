@@ -19,9 +19,9 @@ public class Project implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private int id;
-  @NotBlank
+  @NotBlank(message="Project's name cannot be blank")
   private String name;
-  @NotBlank
+  @NotBlank(message="Project's description cannot be blank")
   private String description;
   private byte[] picture;
   private String urlGithub;

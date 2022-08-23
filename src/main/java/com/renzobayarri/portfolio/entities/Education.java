@@ -20,16 +20,16 @@ public class Education implements Comparable<Education>, Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private int id;
-  @NotBlank
-  @Size(min = 6)
+  @NotBlank(message="Education's carrer cannot be blank")
+  @Size(min = 6, message="Education's carrer must contain at least 6 caracters")
   private String carrer;
-  @NotBlank
-  @Size(min = 6)
+  @NotBlank(message="Education's institution cannot be blank")
+  @Size(min = 6, message="Education's institution must contain at least 6 caracters")
   private String institution;
-  @NotBlank
-  @PastOrPresent
+  @NotBlank(message="Education's start date cannot be blank")
+  @PastOrPresent(message="Education's start date must be a past date")
   private LocalDate startDate;
-  @PastOrPresent
+  @PastOrPresent(message="Education's finishDate date must be a past date")
   private LocalDate finishDate;
 
   public Education() {

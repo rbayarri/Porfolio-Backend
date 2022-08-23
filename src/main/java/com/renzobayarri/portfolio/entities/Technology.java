@@ -17,7 +17,7 @@ public class Technology implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private int id;
-  @NotBlank
+  @NotBlank(message="Technology's name cannot be blank")
   private String name;
 
   public Technology() {

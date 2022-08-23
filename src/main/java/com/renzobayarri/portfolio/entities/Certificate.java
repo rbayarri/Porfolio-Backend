@@ -20,15 +20,15 @@ public class Certificate implements Comparable<Certificate>, Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private int id;
-  @NotBlank
-  @Size(min = 2)
+  @NotBlank(message="Certificate's name cannot be blank")
+  @Size(min = 2, message="Certificate's name must contain at least 2 caracters")
   private String name;
   private String idValidation;
-  @NotBlank
-  @Size(min = 4)
+  @NotBlank(message="Certificate's institution cannot be blank")
+  @Size(min = 4, message="Certificate's institution must contain at least 4 caracters")
   private String institution;
-  @NotBlank
-  @PastOrPresent
+  @NotBlank(message="Certificate's date cannot be blank")
+  @PastOrPresent(message="Certificate's date must be a past date")
   private LocalDate date;
 
   public Certificate() {

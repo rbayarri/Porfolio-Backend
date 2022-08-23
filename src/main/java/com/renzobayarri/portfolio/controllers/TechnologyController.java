@@ -49,14 +49,14 @@ public class TechnologyController {
   }
 
   @PostMapping("")
-  public ResponseEntity<?> createOne(@RequestBody Technology technology) {
+  public ResponseEntity<?> createOne(@RequestBody @Valid Technology technology) {
     EntityModel<Technology> entityModel = assembler.toModel(technologyService.createTechnology(technology));
     return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
         .body(entityModel);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<?> updateOne(@RequestBody Technology technology, @PathVariable int id) throws TechnologyNotFoundException {
+  public ResponseEntity<?> updateOne(@RequestBody @Valid Technology technology, @PathVariable int id) throws TechnologyNotFoundException {
     EntityModel<Technology> entityModel = assembler.toModel(technologyService.updateTechnology(id, technology));
     return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
         .body(entityModel);

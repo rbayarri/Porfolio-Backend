@@ -20,18 +20,18 @@ public class Experience implements Comparable<Experience>, Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private int id;
-  @NotBlank
-  @Size(min = 6)
+  @NotBlank(message="Experience's institution cannot be blank")
+  @Size(min = 6, message="Experience's institution must contain at least 6 caracters")
   private String institution;
-  @NotBlank
-  @Size(min = 6)
+  @NotBlank(message="Experience's charge cannot be blank")
+  @Size(min = 6, message="Experience's charge must contain at least 6 caracters")
   private String charge;
-  @NotBlank
-  @PastOrPresent
+  @NotBlank(message="Experience's start date cannot be blank")
+  @PastOrPresent(message="Experience's start date must be a past date")
   private LocalDate startDate;
   private LocalDate finishDate;
-  @NotBlank
-  @Size(min = 10)
+  @NotBlank(message="Experience's description cannot be blank")
+  @Size(min = 10, message="Experience's description must contain at least 10 caracters")
   private String description;
 
   public Experience() {
